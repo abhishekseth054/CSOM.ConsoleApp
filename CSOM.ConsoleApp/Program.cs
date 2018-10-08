@@ -11,6 +11,7 @@ namespace CSOM.ConsoleApp
         static void Main(string[] args)
         {
             Console.WriteLine("Test For Github");
+            Console.ReadKey();
         }
     }
 }
