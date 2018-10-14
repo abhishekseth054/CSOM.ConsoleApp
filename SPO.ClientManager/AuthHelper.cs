@@ -16,6 +16,8 @@ namespace SPO.ClientManager
         public static string userName = ConfigurationManager.AppSettings["UserName"].ToString();
         public static ClientContext GetClientContext()
         {
+            var authManager = new OfficeDevPnP.Core.AuthenticationManager();
+            var context = authManager.GetWebLoginClientContext(siteUrl);
 
             //Console.WriteLine("Enter UserName");
             //string userName = Console.ReadLine();
@@ -49,50 +51,51 @@ namespace SPO.ClientManager
 
             //  //For Office 365 - SharePoint Online
 
-            ClientContext context = new ClientContext(siteUrl)
-            {
-                Credentials = new SharePointOnlineCredentials(userName, GetPassword()),
-            };
+            //ClientContext context = new ClientContext(siteUrl)
+            //{
+            //    Credentials = new SharePointOnlineCredentials(userName, GetPassword()),
+            //};
 
             return context;
         }
 
         public static ClientContext GetTenantContext()
         {
-            ClientContext context = new ClientContext(adminSiteUrl)
-            {
-                Credentials = new SharePointOnlineCredentials(userName, GetPassword()),
-            };
+            var authManager = new OfficeDevPnP.Core.AuthenticationManager();
+            var context = authManager.GetWebLoginClientContext(adminSiteUrl);
+
+            //ClientContext context = new ClientContext(adminSiteUrl)
+            //{
+            //    Credentials = new SharePointOnlineCredentials(userName, GetSecurePassword()),
+            //};
 
             return context;
         }
 
-        private static SecureString GetPassword()
+        private static SecureString GetSecurePassword()
         {
-            //Console.WriteLine("Enter Password");
-            //string password = string.Empty;
-            //ConsoleKeyInfo info = Console.ReadKey(true);
-            //while (info.Key != ConsoleKey.Enter)
-            //{
-            //    if (info.Key != ConsoleKey.Backspace)
-            //    {
-            //        password += info.KeyChar;
-            //        info = Console.ReadKey(true);
-            //    }
-            //    else if (info.Key == ConsoleKey.Backspace)
-            //    {
-            //        if (!string.IsNullOrEmpty(password))
-            //        {
-            //            password = password.Substring
-            //            (0, password.Length - 1);
-            //        }
-            //        info = Console.ReadKey(true);
-            //    }
-            //}
-            //for (int i = 0; i < password.Length; i++)
-            //    Console.Write("*");
-
-            var password = "Mango#123";
+            Console.WriteLine("Enter Password");
+            string password = string.Empty;
+            ConsoleKeyInfo info = Console.ReadKey(true);
+            while (info.Key != ConsoleKey.Enter)
+            {
+                if (info.Key != ConsoleKey.Backspace)
+                {
+                    password += info.KeyChar;
+                    info = Console.ReadKey(true);
+                }
+                else if (info.Key == ConsoleKey.Backspace)
+                {
+                    if (!string.IsNullOrEmpty(password))
+                    {
+                        password = password.Substring
+                        (0, password.Length - 1);
+                    }
+                    info = Console.ReadKey(true);
+                }
+            }
+            for (int i = 0; i < password.Length; i++)
+                Console.Write("*");
 
             SecureString s = new SecureString();
             foreach (char c in password)
@@ -101,6 +104,35 @@ namespace SPO.ClientManager
             }
 
             return s;
+        }
+
+        private static string GetPassword()
+        {
+            Console.WriteLine("Enter Password");
+            string password = string.Empty;
+            ConsoleKeyInfo info = Console.ReadKey(true);
+            while (info.Key != ConsoleKey.Enter)
+            {
+                if (info.Key != ConsoleKey.Backspace)
+                {
+                    password += info.KeyChar;
+                    info = Console.ReadKey(true);
+                }
+                else if (info.Key == ConsoleKey.Backspace)
+                {
+                    if (!string.IsNullOrEmpty(password))
+                    {
+                        password = password.Substring
+                        (0, password.Length - 1);
+                    }
+                    info = Console.ReadKey(true);
+                }
+            }
+            for (int i = 0; i < password.Length; i++)
+                Console.Write("*");
+
+
+            return password;
         }
 
     }
