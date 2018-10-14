@@ -49,7 +49,7 @@ namespace SPO.ClientManager
                             && DateTime.Compare(modifiedDate, lastModifiedDate) >= 0)
                     {
 
-                        Console.WriteLine(userName + " | " + samAccountName + " | " + subDepartment + " | " + birthday + 
+                        Console.WriteLine(userName + " | " + samAccountName + " | " + subDepartment + " | " + birthday +
                                                     " | " + aniversaryDate + " | " + modifiedDate);
 
                         bool res = UpdateProfileProperties(samAccountName, userName, subDepartment
@@ -65,8 +65,15 @@ namespace SPO.ClientManager
                         }
                     }
                 }
-                Console.WriteLine(successCount + " User Profile Updated");
-                Console.WriteLine(failureCount + " User Profile Updation Fail");
+                LogManager.WriteToFile("Updating User Profile properties completed.");
+                int total = successCount + failureCount;
+                LogManager.WriteToFile("Summary : Total Profiles = " + total + "  Success = " + successCount + "  Failure = " + failureCount);
+
+                if (total > 0)
+                    LogManager.WriteToFile("Updating User Profile properties completed.");
+                else
+                    LogManager.WriteToFile("No User properties modified in last " + days + " days.");
+
             }
         }
 
@@ -85,21 +92,32 @@ namespace SPO.ClientManager
         private static bool UpdateProfileProperties(string userAccount, string userName, string subDepartment
                                             , string Anniversarydate, string birthday, DateTime lastUpdated)
         {
-            var SubDepartmentAttribute = ConfigurationManager.AppSettings["SubDepartmentAttribute"];
-            var AnniversaryAttribute = ConfigurationManager.AppSettings["AnniversaryAttribute"];
-            var BirthdayAttribute = ConfigurationManager.AppSettings["BirthdayAttribute"];
+            try
+            {
+                var SubDepartmentAttribute = ConfigurationManager.AppSettings["SubDepartmentAttribute"];
+                var AnniversaryAttribute = ConfigurationManager.AppSettings["AnniversaryAttribute"];
+                var BirthdayAttribute = ConfigurationManager.AppSettings["BirthdayAttribute"];
 
-            var userAccountName = "i:0#.f|membership|" + AuthHelper.userName;
+                var userAccountName = "i:0#.f|membership|" + AuthHelper.userName;
 
-            var tenantCtx = AuthHelper.GetTenantContext();
-            var peopleManager = new PeopleManager(tenantCtx);
+                var tenantCtx = AuthHelper.GetTenantContext();
+                var peopleManager = new PeopleManager(tenantCtx);
 
-            peopleManager.SetSingleValueProfileProperty(userAccountName, SubDepartmentAttribute, subDepartment);
-            peopleManager.SetSingleValueProfileProperty(userAccountName, AnniversaryAttribute, Anniversarydate);
-            peopleManager.SetSingleValueProfileProperty(userAccountName, BirthdayAttribute, birthday);
+                peopleManager.SetSingleValueProfileProperty(userAccountName, SubDepartmentAttribute, subDepartment);
+                peopleManager.SetSingleValueProfileProperty(userAccountName, AnniversaryAttribute, Anniversarydate);
+                peopleManager.SetSingleValueProfileProperty(userAccountName, BirthdayAttribute, birthday);
 
-            tenantCtx.ExecuteQuery();
-            return true;
+                tenantCtx.ExecuteQuery();
+                LogManager.WriteToFile("INFO : " + DateTime.Now + " --> " + userName + " --> " + userAccount + " --> " + lastUpdated + " --> Updated.");
+
+                Console.WriteLine();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogManager.WriteToFile("ERROR : " + DateTime.Now + " --> " + userName + " --> " + ex.Message);
+                return false;
+            }
         }
     }
 }

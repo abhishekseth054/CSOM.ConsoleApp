@@ -11,8 +11,9 @@ namespace CSOM.ConsoleApp
     {
         static void Main(string[] args)
         {
-            SiteCollectionHelper.ProvisionSiteCollection();
-            UserProfile.UpdateUserprofileCustomAttribute();
+            LogManager.WriteToFile("Test");
+            //SiteCollectionHelper.ProvisionSiteCollection();
+            //UserProfile.UpdateUserprofileCustomAttribute();
 
             Console.ReadKey();
         }

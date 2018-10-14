@@ -47,7 +47,7 @@ namespace SPO.ClientManager
             }
         }
 
-        private void DeleteSiteCollectionAndRecycled(SpoOperation spo, ClientContext tenantCtx, Tenant tenant)
+        private static void DeleteSiteCollectionAndRecycled(SpoOperation spo, ClientContext tenantCtx, Tenant tenant)
         {
             // Remove SiteCollection, it will go to Recycle bin
             spo = tenant.RemoveSite(AuthHelper.siteUrl);
@@ -60,7 +60,7 @@ namespace SPO.ClientManager
             WaitForOperation(tenantCtx, spo, msg);
         }
 
-        private void CreateSiteCollection(SpoOperation spo, ClientContext tenantCtx, Tenant tenant)
+        private static void CreateSiteCollection(SpoOperation spo, ClientContext tenantCtx, Tenant tenant)
         {
             var siteCreationProperties = new SiteCreationProperties();
             siteCreationProperties.Url = AuthHelper.siteUrl;
@@ -86,7 +86,7 @@ namespace SPO.ClientManager
             WaitForOperation(tenantCtx, spo, msg);
         }
 
-        private void RemoveSiteFromRecycleBin(SpoOperation spo, ClientContext tenantCtx, Tenant tenant)
+        private static void RemoveSiteFromRecycleBin(SpoOperation spo, ClientContext tenantCtx, Tenant tenant)
         {
             //Removing Site Collection from Recycle bin
             spo = tenant.RemoveDeletedSite(AuthHelper.siteUrl);
@@ -96,7 +96,7 @@ namespace SPO.ClientManager
             WaitForOperation(tenantCtx, spo, msg);
         }
 
-        private void WaitForOperation(ClientContext tenantCtx, SpoOperation spo, string msg)
+        private static void WaitForOperation(ClientContext tenantCtx, SpoOperation spo, string msg)
         {
             Console.WriteLine($"{msg} status: {"Waiting"}");
 
