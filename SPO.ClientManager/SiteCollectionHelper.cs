@@ -12,7 +12,7 @@ namespace SPO.ClientManager
 {
     public class SiteCollectionHelper
     {
-        public void ProvisionSiteCollection()
+        public static void ProvisionSiteCollection()
         {
             try
             {

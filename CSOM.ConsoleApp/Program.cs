@@ -11,10 +11,9 @@ namespace CSOM.ConsoleApp
     {
         static void Main(string[] args)
         {
-            SiteCollectionHelper sc = new SiteCollectionHelper();
-            sc.ProvisionSiteCollection();
+            SiteCollectionHelper.ProvisionSiteCollection();
+            UserProfile.UpdateUserprofileCustomAttribute();
 
-            Console.WriteLine("Test For Github");
             Console.ReadKey();
         }
     }
