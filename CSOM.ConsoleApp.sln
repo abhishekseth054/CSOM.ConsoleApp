@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSOM.ConsoleApp", "CSOM.Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPO.ClientManager", "SPO.ClientManager\SPO.ClientManager.csproj", "{7F89C761-6654-4DBC-8603-F9475D62523C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPO.BrandingManager", "SPO.BrandingManager\SPO.BrandingManager.csproj", "{7531BA4C-71F2-449C-8545-9C5A1081A7F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7F89C761-6654-4DBC-8603-F9475D62523C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F89C761-6654-4DBC-8603-F9475D62523C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F89C761-6654-4DBC-8603-F9475D62523C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7531BA4C-71F2-449C-8545-9C5A1081A7F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7531BA4C-71F2-449C-8545-9C5A1081A7F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7531BA4C-71F2-449C-8545-9C5A1081A7F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7531BA4C-71F2-449C-8545-9C5A1081A7F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
