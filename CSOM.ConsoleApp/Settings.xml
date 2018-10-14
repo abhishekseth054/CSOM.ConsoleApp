@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SPConfiguration>
+  <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <!-- Customer -->
+    <Field
+         ID="{8A907E22-C36D-43C0-B541-6B8F8FBFBC0F}"
+         Name="Customer"
+         DisplayName="$Resources:CuVi,sc_customer;"
+         Required="TRUE"
+         Type="Text"
+         Group="Custom Site Columns">
+    </Field>
+    <!-- Brand -->
+    <Field
+         ID="{9c535734-2c4f-4259-8871-32ed72236731}"
+         Name="Brand"
+         DisplayName="$Resources:CuVi,sc_brand;"
+         Required="TRUE"
+         Type="Note"
+         RichText="False"
+         NumLines="4"
+         Group="Customer Visitor Site Columns">
+    </Field>
+    <!-- Contact -->
+    <Field
+         ID="{305ce425-9875-4604-8afc-39d79b779e72}"
+         Name="ContactPeople"
+         DisplayName="$Resources:CuVi,sc_contactpeople;"
+         BaseType="Text"
+         Type="UserMulti" Sealed="TRUE"
+         List="UserInfo"
+         UserSelectionMode="PeopleOnly"
+         Group="Customer Visitor Site Columns">
+    </Field>
+    <!-- Parent ContentType: Item (0x01) -->
+    <ContentType ID="0x0100636C625E34BA404AB3F7CA5DC0E9C9F2" Name="$Resources:CuVi,ct_customervisitor_title;" Group="Custom Content Types" Description="$Resources:CuVi,ct_customervisitor_desc;" Inherits="FALSE" Version="0">
+      <FieldRefs>
+        <FieldRef ID="{8A907E22-C36D-43C0-B541-6B8F8FBFBC0F}" Required="TRUE" />
+        <FieldRef ID="{9c535734-2c4f-4259-8871-32ed72236731}" Required="TRUE" />
+        <FieldRef ID="{305ce425-9875-4604-8afc-39d79b779e72}" Required="TRUE" Sealed="TRUE" />
+      </FieldRefs>
+    </ContentType>
+  </Elements>
+ 
+  <List
+      xmlns:ows="Microsoft SharePoint" Title="CustomerVisitorsList" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/CustomerVisitorsList" BaseType="0"
+      xmlns="http://schemas.microsoft.com/sharepoint/" EnableContentTypes="TRUE">
+    <MetaData>
+      <ContentTypes>
+        <ContentType ID="0x0100636C625E34BA404AB3F7CA5DC0E9C9F2" Name="$Resources:CuVi,ct_customervisitor_title;" Group="Custom Content Types" Description="$Resources:CuVi,ct_customervisitor_desc;" Inherits="FALSE" Version="0">
+          <!-- Only reference with id, other properties coming from content type so no need to add additional properties -->
+          <FieldRefs>
+            <FieldRef ID="{8A907E22-C36D-43C0-B541-6B8F8FBFBC0F}" />
+            <FieldRef ID="{9c535734-2c4f-4259-8871-32ed72236731}" />
+            <FieldRef ID="{305ce425-9875-4604-8afc-39d79b779e72}" />
+          </FieldRefs>
+        </ContentType>
+      </ContentTypes>
+      <Fields>
+        <!-- Why are all properties are needed? This is a senseless code duplication, why don't take it from Site Column Definition? -->
+        <Field ID="{8A907E22-C36D-43C0-B541-6B8F8FBFBC0F}" Name="Customer" DisplayName="$Resources:CuVi,sc_customer;" Type="Text" Required="TRUE" Group="Customer Visitor Site Columns"></Field>
+        <Field ID="{9c535734-2c4f-4259-8871-32ed72236731}" Name="Brand" DisplayName="$Resources:CuVi,sc_brand;" Required="TRUE" Type="Note" RichText="False" NumLines="4" Group="Customer Visitor Site Columns"></Field>
+        <Field ID="{305ce425-9875-4604-8afc-39d79b779e72}" Name="ContactPeople" DisplayName="$Resources:CuVi,sc_contactpeople;" BaseType="Text" Type="UserMulti" Sealed="TRUE" List="UserInfo" UserSelectionMode="PeopleOnly" Group="Customer Visitor Site Columns"></Field>
+      </Fields>
+      <Views>[...]</Views>
+    </MetaData>
+  </List>>
+
+</SPConfiguration>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPO.ClientManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace CSOM.ConsoleApp
     {
         static void Main(string[] args)
         {
+            SiteCollectionHelper sc = new SiteCollectionHelper();
+            sc.ProvisionSiteCollection();
+
             Console.WriteLine("Test For Github");
             Console.ReadKey();
         }
